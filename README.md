@@ -95,8 +95,8 @@ Also, you will get a method to update your existing database:
 Movie.all.each do { |movie| movie.update_bayesian }
 ```
 
-Keep in mind that this will put a large load on your datebase. You probably want to do this a fraction at a time and 
-asynchronously with [Resqueue](https://github.com/defunkt/resque) or something similar.
+Keep in mind that this will put a large load on your database. You probably want to do this a small section at a time and 
+asynchronously with [Resque](https://github.com/defunkt/resque) or something similar.
 
 ## How It Works
 
