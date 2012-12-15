@@ -14,7 +14,7 @@ module Mongoid::BayesianChild
   module ClassMethods
     def bayesian_child_for parent, options
       # returns the owner on this record
-      define_method "bayesian_child" do
+      define_method "bayesian_parent" do
         send parent
       end
       define_singleton_method "bayesian_field" do
