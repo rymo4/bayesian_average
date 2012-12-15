@@ -89,6 +89,24 @@ This exposes the following method:
 movie.bayesian_average #=> Float
 ```
 
+Also, you will get a method to update your existing database:
+
+```ruby
+Movie.all.each do { |movie| movie.update_bayesian }
+```
+
+Keep in mind that this will put a large load on your datebase. You probably want to do this a fraction at a time and 
+asynchronously with [Resqueue](https://github.com/defunkt/resque) or something similar.
+
+## How It Works
+
+This gem will store two fields on your parent model, ```num_bayesian_children``` and ```num_bayesian_points```.
+As you can probably guess, this means that your Bansesian average is very percise. Instead of storing a float,
+it will keep these fields to prevent rounding errors from propagating over the lifetime of your application. 
+
+The child model gets a ```before_create``` that increments the parent model atomically to update the number
+of children and number of total points.
+
 ## License (MIT)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
