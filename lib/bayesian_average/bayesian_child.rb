@@ -1,4 +1,4 @@
-module Mongoid::BayesianChild
+module ::Mongoid::BayesianChild
   extend ActiveSupport::Concern
 
   def update_bayesian_parent
