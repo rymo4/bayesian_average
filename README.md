@@ -1,5 +1,7 @@
 # Bayesian Average
 
+[![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/rymo4/civic-network)
+
 A (work in progress) gem for adding Bayesian averages to your Rails projects. What is a Bayesian average?
 
 tl;dr - Get rid of the issues caused by averages (means) of small datasets or datasets with outliars. 
