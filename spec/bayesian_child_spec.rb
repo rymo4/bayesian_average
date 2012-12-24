@@ -1,19 +1,22 @@
 require 'spec_helper'
 
 describe Mongoid::BayesianChild do
-  context 'with a parent' do
+  context 'newly created' do
+
     before :each do
-      @bayesian_child = Object.new
-      @bayesian_child.extend Mongoid::BayesianChild
-
-      @bayesian_parent = Object.new
-      @bayesian_parent.extend Mongoid::BayesianParent
+      @movie = Movie.create!
     end
-    it 'has the correct fields' do
 
+    it 'should send the update messages to the parent' do
+      @movie.should_receive :increment_values
+      child = @movie.rankings.create! score: 3
+      child.bayesian_parent.should be(@movie)
     end
-  end
 
-  context 'without a parent' do
+    it 'should add `score` points to the parent' do
+      @movie.num_bayesian_points.should eq(0)
+      @movie.rankings.create! score: 5
+      @movie.num_bayesian_points.should eq(5)
+    end
   end
 end

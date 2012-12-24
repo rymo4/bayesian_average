@@ -1,14 +1,12 @@
-module ::Mongoid::BayesianChild
+module Mongoid::BayesianChild
   extend ActiveSupport::Concern
 
-  def update_bayesian_parent
-    bayesian_parent.inc :num_bayesian_children, 1
-    bayesian_parent.inc :num_bayesian_points,   send(self.class.bayesian_field)
+  included do
+    before_create :update_bayesian_parent
   end
 
-  included do |base|
-    base.field          :bayesian_average, type: Float, default: 0
-    base.before_create  :update_bayesian_parent
+  def update_bayesian_parent
+    bayesian_parent.increment_values score
   end
 
   module ClassMethods

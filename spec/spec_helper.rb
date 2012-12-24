@@ -12,9 +12,41 @@ RSpec.configure do |config|
   config.run_all_when_everything_filtered = true
   config.filter_run :focus
 
+  config.before :each do
+    Mongoid::Sessions.default.collections.select {|c| c.name !~ /system/ }.each(&:drop)
+  end
+
   # Run specs in random order to surface order dependencies. If you find an
   # order dependency and want to debug it, you can fix the order by providing
   # the seed, which is printed after each run.
   #     --seed 1234
   config.order = 'random'
+end
+
+Mongoid.configure do |config|
+  config.connect_to("bayesian_average_test")
+end
+
+class Movie
+  include Mongoid::Document
+  include Mongoid::BayesianParent
+
+  has_many :rankings
+
+  bayesian_parent_for :ranking
+
+  def bayesian_collection
+    Movie.all
+  end
+end
+
+class Ranking
+  include Mongoid::Document
+  include Mongoid::BayesianChild
+
+  belongs_to :movie
+
+  field :score, type: Integer, default: 0
+
+  bayesian_child_for :movie, field: :score
 end

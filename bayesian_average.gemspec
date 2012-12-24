@@ -9,5 +9,6 @@ Gem::Specification.new do |s|
   s.files       = ["lib/bayesian_average.rb"]
   s.add_dependency('mongoid', '>= 3.0.0')
   s.add_dependency('activesupport', '>= 3.2.0')
+  s.add_dependency "bson_ext"
   s.add_development_dependency 'rspec', '2.12.0'
 end
