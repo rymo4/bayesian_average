@@ -33,7 +33,7 @@ class Movie
 
   has_many :rankings
 
-  bayesian_parent_for :ranking
+  bayesian_parent_for :ranking, weight: 50
 
   def bayesian_collection
     Movie.all
