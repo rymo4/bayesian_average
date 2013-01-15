@@ -8,7 +8,7 @@ describe Mongoid::BayesianChild do
     end
 
     it 'should send the update messages to the parent' do
-      @movie.should_receive :increment_values
+      @movie.should_receive :increment_bayesian_score_by
       child = @movie.rankings.create! score: 3
       child.bayesian_parent.should be(@movie)
     end
