@@ -34,7 +34,7 @@ module Mongoid::BayesianParent
       s + c.send(self.class.child_field)
     }
 
-    update_attributes num_bayesian_children: send(association).count,
+    update_attributes num_bayesian_children: bayesian_children.count,
                       num_bayesian_points:   points_in_children
   end
 
