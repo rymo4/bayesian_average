@@ -34,8 +34,8 @@ module Mongoid::BayesianParent
       s + c.send(self.class.child_field)
     }
 
-    update_attributes :num_bayesian_children, send(association).count,
-                      :num_bayesian_points,   points_in_children
+    update_attributes num_bayesian_children: send(association).count,
+                      num_bayesian_points:   points_in_children
   end
 
   def increment_bayesian_score_by num_bayesian_points
