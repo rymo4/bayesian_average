@@ -56,6 +56,7 @@ module Mongoid::BayesianParent
       define_singleton_method "bayesian_child_class" do
         child.to_s.camelize.constantize
       end
+
       define_singleton_method "bayesian_child" do
         child
       end
