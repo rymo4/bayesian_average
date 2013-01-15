@@ -24,12 +24,10 @@ Currently the project is dependent on [Mongoid](https://github.com/mongoid/mongo
 
 ## Use
 
-Not on RubyGems quite yet. It will be once it is fully tested and I've used it for a while on a project or two.
-
 Gemfile:
 
 ```ruby
-gem "bayesian_average", git: 'git://github.com/rymo4/bayesian_average.git'
+gem "bayesian_average", "~> 0.1.1"
 ```
 
 In your model being ranked:
