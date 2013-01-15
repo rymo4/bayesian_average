@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'bayesian_average'
-  s.version     = '0.0.1'
+  s.version     = '0.1.0'
   s.date        = '2012-12-13'
   s.summary     = "A simple way to add Bayesian averages to you ActiveModel classes"
   s.description = "A simple way to add Bayesian averages to you ActiveModel classes"
