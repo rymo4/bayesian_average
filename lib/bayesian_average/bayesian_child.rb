@@ -6,7 +6,7 @@ module Mongoid::BayesianChild
   end
 
   def update_bayesian_parent
-    bayesian_parent.increment_values score
+    bayesian_parent.increment_bayesian_score_by score
   end
 
   module ClassMethods
