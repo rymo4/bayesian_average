@@ -41,7 +41,7 @@ class Movie
   
   has_many :rankings
   
-  bayesian_parent_for :ranking
+  bayesian_parent_for :ranking, weight: 100
   
   def bayesian_collection
     Movie.all
@@ -65,14 +65,7 @@ end
   
 Here we define the parent and child. Let's look at the parent first.
 
-The parent must ```have_many``` of the child objects. The line ```bayesian_parent_for :ranking``` signifies that
-objects of the ```Ranking``` class hold the scores. At this point parents can only have Bayesian scores for
-one class. The method definition is important. It signifies what the Bayesian score is based off of. In this case,
-the average of all the movies will be taken into account, but defining this method allows you to define more
-appropriate subsets. For example, if the ```Movie``` class has a ```Director```, then ```director.movies``` 
-might be a more reliable mean, since the movies by a particulr director tend to be of a certain quality. Keep in mind
-that if this dataset is small, it will defeat the purpose of a Bayesain average, thus something like this might be
-better:
+The parent must ```have_many``` of the child objects. The line ```bayesian_parent_for :ranking, weight: 100```  signifies that objects of the ```Ranking``` class hold the scores, and that the average of the collection will have the weight of `weight` objects. At this point parents can only have Bayesian  scores for one class. The method definition is important. It signifies what the Bayesian score is based off of. In this case, the average of all the movies will be taken into account, but defining this method allows you to define  more appropriate subsets. For example, if the ```Movie``` class has a ```Director```, then ```director.movies``` might be a more reliable mean, since the movies by a particular director tend to be of a certain quality. Keep in mind that if this dataset is small, it will defeat the purpose of a Bayesain average, thus something like this might be better:
 
 ```ruby
 def bayesian_collection
