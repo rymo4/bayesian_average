@@ -1,5 +1,7 @@
 # Bayesian Average
 
+[![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/rymo4/bayesian_average)
+
 A (work in progress) gem for adding Bayesian averages to your Rails projects. What is a Bayesian average?
 
 tl;dr - Get rid of the issues caused by averages (means) of small datasets or datasets with outliars. 
@@ -18,13 +20,11 @@ Taken from the [Wikipedia article](http://en.wikipedia.org/wiki/Bayesian_average
 
 ## Dependencies
 
-Currently the project is dependent on [Mongoid](https://github.com/mongoid/mongoid). This will be changed shortly. 
-Nothing is very Mongo specific, so AR support shouldn't be an issue
+Currently the project is dependent on [Mongoid](https://github.com/mongoid/mongoid). I might add AR support later.
 
 ## Use
 
-Not on RubyGems quite yet. It will be once I feel that it's ready. 
-
+Not on RubyGems quite yet. It will be once it is fully tested and I've used it for a while on a project or two.
 
 Gemfile:
 
@@ -101,8 +101,8 @@ asynchronously with [Resque](https://github.com/defunkt/resque) or something sim
 ## How It Works
 
 This gem will store two fields on your parent model, ```num_bayesian_children``` and ```num_bayesian_points```.
-As you can probably guess, this means that your Bansesian average is very percise. Instead of storing a float,
-it will keep these fields to prevent rounding errors from propagating over the lifetime of your application. 
+Instead of storing a float, it will keep these fields to prevent rounding errors from propagating over the 
+lifetime of your application. 
 
 The child model gets a ```before_create``` that increments the parent model atomically to update the number
 of children and number of total points.
