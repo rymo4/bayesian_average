@@ -1,6 +1,8 @@
 module Mongoid::BayesianParent
   extend ActiveSupport::Concern
 
+  DEFAULT_WEIGHT = 10
+
   def bayesian_average
     klass       = self.class
     field       = klass.child_field
@@ -48,7 +50,9 @@ module Mongoid::BayesianParent
 
   module ClassMethods
     def bayesian_parent_for child, options = {}
-      Mongoid::BayesianParent.const_set('C', options[:weight] || 10)
+      weight = options[:weight] || Mongoid::BayesianParent::DEFAULT_WEIGHT
+      Mongoid::BayesianParent.const_set 'C', weight
+
       define_singleton_method "bayesian_child_class" do
         child.to_s.camelize.constantize
       end
